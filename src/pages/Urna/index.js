@@ -6,11 +6,11 @@ import styles from "./style"
 import { FontAwesome } from "@expo/vector-icons"
 
 export default function Urna({ navigation }) {
-    const [urnas, setUrnas] = useState([])
-
-
+    const [urnas, setUrnas] = useState([route.params.input])
+    const inputMax = route.params.input
+    console.log(inputMax)
     useEffect(() => {
-        firebase.firestore().collection("Projeto")
+        firebase.firestore().collection("Projeto").doc(inputMax)
             .get()
             .then((snapshot) => {
                 const list = []

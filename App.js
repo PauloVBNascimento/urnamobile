@@ -15,7 +15,7 @@ export default function App() {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Urna">
+      <Stack.Navigator initialRouteName="Inicial">
         <Stack.Screen
           name="Inicial"
           component={Inicial}

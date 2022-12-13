@@ -6,11 +6,16 @@ import styles from "./style"
 import { FontAwesome } from "@expo/vector-icons"
 
 export default function Details({ navigation, route }) {
-    const [urnas, setUrnas] = useState([route.params.id])
-    const idUrna = route.params.id
-    console.log(idUrna)
+    const [urnas, setUrnas] = useState([route.params.lista])
+    const lista = route.params.lista
+    console.log(lista)
+    let urnaencontrada = ''
+    lista.map((item) => {
+        urnaencontrada = item.id
+    })
+    console.log( "urna: " + urnaencontrada)
     useEffect(() => {
-        firebase.firestore().collection("Projeto").doc(idUrna).collection("Candidato")
+        firebase.firestore().collection("Projeto").doc(urnaencontrada).collection("Candidato")
             .get()
             .then((snapshot) => {
                 const list = []
