@@ -15,14 +15,16 @@ const styles = StyleSheet.create({
     },
     descriptionUrna: {
         width: "100%",
-        alignContent: "flex-start",
-        backgroundColor: "#f5f5f5",
+        alignContent: "center",
+        backgroundColor: "blue",
         padding: 12,
-        paddingHorizontal: 20,
+        paddingHorizontal: 80,
         borderRadius: 50,
         marginBottom: 5,
         marginRight: 15,
-        color: "#676262"
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
     },
     buttonVote: {
         position: "absolute",

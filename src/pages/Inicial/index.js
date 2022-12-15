@@ -11,10 +11,10 @@ export default function Inicial({ navigation }) {
     const [input, setInput] = useState('')
     const [senha, setSenha] = useState('')
 
-    function procurarUrna() {
-        firebase.firestore().collection("Projeto")
+   async function procurarUrna() {
+       firebase.firestore().collection("Projeto")
             .get()
-            .then((snapshot) => {
+            .then((snapshot) => { 
                 const list = []
                 snapshot.forEach((doc) => {
                     list.push({
@@ -22,40 +22,39 @@ export default function Inicial({ navigation }) {
                         senha: doc.data().senha
 
                     })
+                    setUrnas(list);
                 });
-                setUrnas(list);
+                let newLista = [];
+                urnas.map((item) => {
+                    if (item.senha === input) {
+                        newLista.push(item)
+                    }
+                })
+                newLista.map((item) => {
+                    setSenha(item.senha)
+                    console.log(item.senha)
+                })
+                
+                if (senha === input) {
+                    navigation.navigate("Login", {
+                        lista: newLista,
+            
+                    }
+                    )
+                } else {
+                    alert("senha invalida")
+                }
 
                 console.log(urnas)
-                procurarUrna2();
             })
             .catch((error) => {
                 console.log(error)
             });
 }
-function procurarUrna2() {
-    let newLista = [];
-    urnas.map((item) => {
-        if (item.senha === input) {
-            newLista.push(item)
-        }
-    })
-    newLista.map((item) => {
-        setSenha(item.senha)
-        console.log(item.senha)
-    })
-    
-    if (senha === input) {
-        navigation.navigate("Details", {
-            lista: newLista,
 
-        }
-        )
-    } else {
-        alert("senha invalida")
-    }
     // if (input === urnas.senha) {
 
-}
+
     // navigation.navigate("Details", {
     //     input: input
     // })
@@ -64,7 +63,7 @@ function procurarUrna2() {
 
     return (
         <View style={styles.container}>
-            <Text>Senha</Text>
+            <Text style={styles.description}>Senha da Urna</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Ex: Urna Teste"
@@ -73,7 +72,7 @@ function procurarUrna2() {
             <TouchableOpacity
                 style={styles.procurar}
                 onPress={() => { procurarUrna() }}>
-                <Text>Procurar</Text>
+                <Text style={styles.procurarButton}>Procurar</Text>
             </TouchableOpacity>
         </View>
     )
